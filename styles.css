@@ -1,0 +1,253 @@
+/* Basic Resets */
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+a {
+    color: #FFF; /* White color for hyperlinks */
+    text-decoration: none; /* Remove underlines by default */
+    animation: blink 1s infinite alternate; /* Add blinking animation */
+   
+}
+
+a:visited {
+    color: #c9dca4; /* White color for hyperlinks */
+    text-decoration: none; /* Remove underlines by default */
+    animation: blink 1s infinite alternate; /* Add blinking animation */
+}
+
+body, h1, h2, h3, p, ul, li, button {
+    margin: 0;
+    padding: 0;
+	
+}
+
+body {
+    font-family: 'Lato', sans-serif; /* A modern font */
+    color: #FFF;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: rgba(0, 0, 0, 0.7);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+#logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #FFD700; /* Gold color for branding */
+}
+
+nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #FFF;
+    padding: 5px 10px;
+    border-radius: 15px;
+    transition: background 0.3s, color 0.3s;
+}
+
+nav a:hover {
+    background: #4c00ff;
+    color: #000;
+}
+
+main {
+    max-width: 1200px;
+    margin: 100px auto;
+    padding: 0 20px;
+}
+
+#hero {
+    text-align: center;
+    margin-top: 50px;
+    padding: 50px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+#hero h1 {
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+#hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button {
+    padding: 15px 30px;
+    border: none;
+    background: linear-gradient(45deg, #b43ad5, #7433a9);
+    color: #000;
+    cursor: pointer;
+    border-radius: 50px;
+    font-size: 18px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+}
+
+
+#universeContainer, #skyCanvas {
+	overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.star[data-star-id="1"] {
+    background-color: #FF4500; /* Orange-red */
+}
+
+.star[data-star-id="2"] {
+    background-color: #1E90FF; /* Dodger blue */
+}
+
+.star[data-star-id="about"] {
+    background-color: #32CD32; /* Lime green */
+}
+
+.star[data-star-id="services"] {
+    background-color: #FF69B4; /* Hot pink */
+}
+
+.star[data-star-id="portfolio"] {
+    background-color: #8A2BE2; /* Blue violet */
+}
+
+.star[data-star-id="contact"] {
+    background-color: #FFD700; /* Gold */
+}
+
+
+
+
+/* Add these styles to your CSS file */
+
+/* ... your existing CSS ... */
+
+/* Modal Styles */
+.info-modal {
+    display: none;
+    padding: 50px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    width: auto;
+    height: auto;
+    max-width: 70%;
+    max-height: 70%;
+    background-color: rgba(84, 91, 35, 0.253);
+    z-index: 1;
+    overflow: hidden;
+
+}
+
+.info-modal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: -17px; /* Typically the width of a scrollbar */
+    bottom: 0;
+    z-index: 1;
+    background: transparent;
+    pointer-events: none; /* Ensure it doesn't interfere with content interactions */
+}
+
+
+.close-btn {
+    position: absolute;
+    top: 2%;
+    right: 5%;
+    font-size: 30px;
+    cursor: pointer;
+    color: #fff;
+
+}
+
+.close-btn:hover {
+    color: #ccc;
+}
+
+/* Keyframe animations */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Keyframe animations */
+@keyframes modalFadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes modalSlideUp {
+    from {
+        transform: translateY(100px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes modalZoomIn {
+    from {
+        transform: scale(0.2);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Add more styles as needed */
+
+
+/* Add more styles as needed */
+
+
