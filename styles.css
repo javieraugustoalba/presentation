@@ -12,8 +12,14 @@ body, html {
 a {
     color: #FFF; /* White color for hyperlinks */
     text-decoration: none; /* Remove underlines by default */
-    animation: blink 1s infinite alternate; /* Add blinking animation */
-   
+    animation: blink 4s infinite alternate; /* Add blinking animation */
+}
+@keyframes blink {
+    0% { color: rgb(255, 0, 0); }
+    25% { color: rgb(0, 255, 0); }
+    50% { color: rgb(0, 0, 255); }
+    75% { color: rgb(255, 255, 0); }
+    100% { color: rgb(255, 0, 255); }
 }
 
 a:visited {
@@ -25,7 +31,16 @@ a:visited {
 body, h1, h2, h3, p, ul, li, button {
     margin: 0;
     padding: 0;
+
 	
+}
+
+h1, h2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.5s ease-in-out;
 }
 
 body {
@@ -129,56 +144,19 @@ button:hover {
     left: 0;
 }
 
-.star[data-star-id="1"] {
-    background-color: #FF4500; /* Orange-red */
-}
-
-.star[data-star-id="2"] {
-    background-color: #1E90FF; /* Dodger blue */
-}
-
-.star[data-star-id="about"] {
-    background-color: #32CD32; /* Lime green */
-}
-
-.star[data-star-id="services"] {
-    background-color: #FF69B4; /* Hot pink */
-}
-
-.star[data-star-id="portfolio"] {
-    background-color: #8A2BE2; /* Blue violet */
-}
-
-.star[data-star-id="contact"] {
-    background-color: #FFD700; /* Gold */
-}
-
-
-
-
-/* Add these styles to your CSS file */
-
-/* ... your existing CSS ... */
-
-/* Modal Styles */
 .info-modal {
-    display: none;
-    padding: 50px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 25px;
-    position: fixed;
-    top: 10%;
-    left: 10%;
-    width: auto;
-    height: auto;
-    max-width: 70%;
-    max-height: 70%;
-    background-color: rgba(84, 91, 35, 0.253);
-    z-index: 1;
+    display: none; /* Initially hidden */
+    position: fixed; /* Fixed position */
+    top: 0; /* Full height */
+    left: 0; /* Full width */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    z-index: 1; /* Sit on top */
+    background-color: rgba(155, 98, 176, 0.2); /* Black background with opacity */
     overflow: hidden;
-
+    transition: background-color 0.5s ease-in-out;
 }
+
 
 .info-modal::before {
     content: '';
@@ -192,7 +170,13 @@ button:hover {
     pointer-events: none; /* Ensure it doesn't interfere with content interactions */
 }
 
-
+.modal-content {
+    /* ... other styles ... */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .close-btn {
     position: absolute;
     top: 2%;
@@ -200,6 +184,7 @@ button:hover {
     font-size: 30px;
     cursor: pointer;
     color: #fff;
+    visibility: hidden;
 
 }
 
@@ -251,3 +236,107 @@ button:hover {
 /* Add more styles as needed */
 
 
+#color-picker {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+ 
+    padding: 10px;
+    border-radius: 5px;
+
+    z-index: 3; /* Above the modal */
+}
+
+#url-preview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px; /* Space between previews */
+}
+
+#url-preview a {
+    /* Optional: Add some styling for the preview links */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#url-preview a:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#url-preview img {
+    width: 300px; /* Or your desired width */
+    height: 200px; /* Or your desired height */
+    object-fit: cover; /* To maintain aspect ratio */
+}
+
+.iframe-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+iframe {
+    border: none;
+}
+
+
+@keyframes liftOff {
+    0% {
+      transform: translateY(30vh);
+      opacity: 0;
+    }
+    80% {
+      transform: translateY(-60vh);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-80vh) scaleX(0.01) scaleY(0.01);
+      opacity: 0;
+    }
+}
+
+@keyframes starTrail {
+    0% {
+      transform: scaleX(1) scaleY(1);
+      opacity: 0;
+    }
+    25% {
+      opacity: 1;
+    }
+    75% {
+      transform: scaleX(10) scaleY(0.001);
+      opacity: 1;
+    }
+    100% {
+      transform: scaleX(20) scaleY(0.001);
+      opacity: 0;
+    }
+}
+
+
+
+  p.liftOffText {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: liftOff 15s forwards;
+    font-size: 2rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  .shootingStar {
+    position: absolute;
+    bottom: -10vh;
+    left: 50%;
+    height: 2px;
+    width: 2px;
+    background-color: #FFF;
+    animation: starTrail 15s forwards;
+    transform-origin: left center;
+  }

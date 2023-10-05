@@ -1,5 +1,5 @@
 import { textureSun, textureMercury, textureVenus, textureEarth, textureMars, textureJupiter, textureSaturn, textureSaturnRings, textureUranus, textureNeptune, texturePluto, textureExoplanet } from "./textures.js";
-import { sunTemplate, mercuryTemplate, venusTemplate, earthTemplate, marsTemplate, jupiterTemplate, saturnTemplate, uranusTemplate, neptuneTemplate, plutoTemplate, exoplanetTemplate } from './planetTemplates.js';
+import { sunTemplate, mercuryTemplate, venusTemplate, earthTemplate, marsTemplate, jupiterTemplate, saturnTemplate, uranusTemplate, neptuneTemplate, plutoTemplate, saturnRingsTemplate, exoplanetTemplate } from './planetTemplates.js';
 const canvas = document.getElementById('skyCanvas');
 const ctx = canvas.getContext('2d');
 const orbitRadiusFactor = 1;
@@ -62,6 +62,7 @@ const planetInfoMap = {
     uranus: { title: "Uranus", template: uranusTemplate },
     neptune: { title: "Neptune", template: neptuneTemplate },
     pluto: { title: "Pluto", template: plutoTemplate },
+    saturnrings: { title: "SaturnRings", template: saturnRingsTemplate },
     exoplanet: { title: "Exoplanet", template: exoplanetTemplate }
 };
 
@@ -224,13 +225,13 @@ closeModal.addEventListener('click', () => {
     closeTheModal();
 });
 
-// New code: listen for the 'keydown' event
-window.addEventListener('keydown', (event) => {
-    // Check if the pressed key is 'Escape' and the modal is open
-    if (event.key === 'Escape' && isModalOpen) {
+// listen for the 'keydown' event
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
         closeTheModal();
+
     }
-});
+  });
 
 // Refactored close modal logic into a function
 function closeTheModal() {
@@ -313,7 +314,7 @@ function initThreeJS() {
         map: textureSaturnRings,
         side: THREE.DoubleSide, // Make the rings visible from both sides
         transparent: true, // Make the rings transparent
-        opacity: 0.8, // Adjust the opacity as needed
+        opacity: 0.5, // Adjust the opacity as needed
     });
     const materialUranus = new THREE.MeshBasicMaterial({
         map: textureUranus
@@ -436,6 +437,14 @@ function initThreeJS() {
             planet.isPaused = true;
             planet = saturn;
         }
+        if (planet === saturnRings) {
+            planet = saturn;
+            planet.isPaused = true;
+            planet = saturnRings;
+        }
+        if(planet === mercury){
+            previewUrls(urls);
+        }
         const starInfo = {
             name: name,
             description: descriptionHTML
@@ -544,4 +553,68 @@ function rotateCamera(deltaX, deltaY) {
     camera.rotation.y -= deltaX * rotationSpeedY;
 }
 
+
+// script.js
+export function applyColor() {
+    var color = document.getElementById('colorPicker').value;
+    var links = document.querySelectorAll('a');
+    links.forEach(function(link) {
+        link.style.color = color;
+        link.style.animation = 'modalFadeIn 1s infinite';
+    });
+    var h1s = document.querySelectorAll('h1');
+    h1s.forEach(function(h1) {
+        h1.style.color = color;
+    });
+
+    var h2s = document.querySelectorAll('h2');
+    h2s.forEach(function(h1) {
+        h1.style.color = color;
+    });
+    // Convert hex to rgba with opacity
+    var rgbaColor = hexToRgba(color, 0.2); // 0.5 is the opacity level, you can adjust it
+    
+    // Change .info-modal background color
+    var modal = document.querySelector('.info-modal');
+    modal.style.backgroundColor = rgbaColor;
+}
+
+// Function to convert hex to rgba
+function hexToRgba(hex, opacity) {
+    var bigint = parseInt(hex.slice(1), 16);
+    var r = (bigint >> 16) & 255;
+    var g = (bigint >> 8) & 255;
+    var b = bigint & 255;
+    return "rgba(" + r + ", " + g + ", " + b + ", " + opacity + ")";
+}
+
+document.getElementById('applyColorBtn').addEventListener('click', applyColor);
+
+function previewUrls(urlList) {
+    var previewDiv = document.getElementById('url-preview');
+    
+    urlList.forEach(function(url) {
+        // Create a link element
+        var link = document.createElement('a');
+        link.href = url;
+        link.target = '_blank'; // Open in a new tab
+        
+        // Create an iframe element
+        var iframe = document.createElement('iframe');
+        iframe.src = url;
+        iframe.width = '600';
+        iframe.height = '400';
+        
+        // Append the iframe to the link
+        link.appendChild(iframe);
+        
+        // Append the link to the preview div
+        previewDiv.appendChild(link);
+    });
+}
+
+var urls = [
+    'https://dataconomy.com/2023/04/18/basics-of-artificial-intelligence/',
+    'https://blog.invgate.com/artificial-intelligence'
+];
 
